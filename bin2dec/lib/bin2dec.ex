@@ -26,20 +26,17 @@ defmodule Bin2dec do
   end
 
   def convert_binary_to_decimal_iteratively(binary) do
-    resolution =
+    [_, decimal] =
       Enum.reduce(binary, [0, 0], fn element, acc ->
-        first_element = Enum.at(acc, 0)
-        second_element = Enum.at(acc, 1)
+        [counter, sum] = acc
 
-        new_first_element = first_element + 1
-        new_second_element = element * :math.pow(2, first_element) + second_element
+        new_counter = counter + 1
+        new_sum = element * :math.pow(2, counter) + sum
 
-        [new_first_element, new_second_element]
+        [new_counter, new_sum]
       end)
 
-    result = Enum.at(resolution, 1)
-
-    result
+    decimal
   end
 
   @spec convert_binary_to_decimal_recursively(any) :: integer
